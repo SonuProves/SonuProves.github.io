@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sonu Kumar | Mathematical Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #667eea;
+      --secondary: #764ba2;
+      --accent: #f093fb;
+      --dark: #1a1a2e;
+      --darker: #16213e;
+      --light: #ffffff;
+      --text-light: #e5e5e5;
+      --gold: #ffd700;
+      --emerald: #50c878;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+      color: var(--text-light);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Mathematical background pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(240, 147, 251, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
+      z-index: -2;
+    }
+
+    /* Animated geometric shapes */
+    .geometric-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: absolute;
+      opacity: 0.1;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .shape:nth-child(1) {
+      top: 10%;
+      left: 10%;
+      animation-delay: -2s;
+    }
+
+    .shape:nth-child(2) {
+      top: 60%;
+      right: 10%;
+      animation-delay: -8s;
+    }
+
+    .shape:nth-child(3) {
+      bottom: 20%;
+      left: 20%;
+      animation-delay: -15s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-30px) rotate(120deg); }
+      66% { transform: translateY(15px) rotate(240deg); }
+    }
+
+    /* Header with mathematical formula animation */
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    }
+
+    .math-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .hero-content {
+      z-index: 2;
+      max-width: 800px;
+      padding: 2rem;
+    }
+
+    .hero-title {
+      font-size: 4rem;
+      font-weight: bold;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.5)); }
+      to { filter: drop-shadow(0 0 30px rgba(240, 147, 251, 0.8)); }
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .math-formula {
+      font-size: 1.2rem;
+      font-family: 'Courier New', monospace;
+      color: var(--gold);
+      margin: 1rem 0;
+      animation: typewriter 4s steps(40) infinite;
+    }
+
+    @keyframes typewriter {
+      0%, 90%, 100% { width: 100%; }
+      0%, 10% { width: 0; }
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      background: rgba(26, 26, 46, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem;
+      border-radius: 50px;
+      border: 1px solid rgba(102, 126, 234, 0.3);
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    nav a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.4), transparent);
+      transition: left 0.5s;
+    }
+
+    nav a:hover::before {
+      left: 100%;
+    }
+
+    nav a:hover {
+      background: rgba(102, 126, 234, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    /* Sections */
+    section {
+      padding: 5rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    h2 {
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      background: linear-gradient(135deg, var(--primary), var(--emerald));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+
+    /* Cards with mathematical hover effects */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .card {
+      background: rgba(26, 26, 46, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+      border-color: var(--accent);
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--gold);
+      position: relative;
+      z-index: 2;
+    }
+
+    .card p {
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card a:hover {
+      transform: translateX(5px);
+      color: var(--light);
+    }
+
+    /* Skills with mathematical symbols */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .skill-item {
+      background: rgba(26, 26, 46, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      border-radius: 15px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-item::before {
+      content: attr(data-symbol);
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      font-size: 4rem;
+      opacity: 0.1;
+      color: var(--accent);
+      font-family: 'Times New Roman', serif;
+    }
+
+    .skill-item:hover {
+      transform: translateY(-5px);
+      background: rgba(102, 126, 234, 0.1);
+      border-color: var(--gold);
+    }
+
+    .skill-level {
+      width: 100%;
+      height: 4px;
+      background: rgba(102, 126, 234, 0.3);
+      border-radius: 2px;
+      margin-top: 1rem;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px;
+      animation: progressLoad 2s ease-out;
+    }
+
+    @keyframes progressLoad {
+      from { width: 0; }
+    }
+
+    /* Mathematical visualization section */
+    .math-viz {
+      text-align: center;
+      margin: 3rem 0;
+    }
+
+    .viz-canvas {
+      border: 2px solid rgba(102, 126, 234, 0.3);
+      border-radius: 20px;
+      background: rgba(26, 26, 46, 0.6);
+      backdrop-filter: blur(10px);
+      margin: 2rem auto;
+      display: block;
+    }
+
+    /* Contact section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .contact-item {
+      background: rgba(26, 26, 46, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(102, 126, 234, 0.3);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+    }
+
+    .contact-item a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: rgba(26, 26, 46, 0.8);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(102, 126, 234, 0.3);
+      margin-top: 3rem;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      nav {
+        position: fixed;
+        bottom: 2rem;
+        right: 50%;
+        transform: translateX(50%);
+        top: auto;
+      }
+      
+      section {
+        padding: 3rem 1rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+    }
+
+    /* Scroll animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated geometric background -->
+  <div class="geometric-bg">
+    <div class="shape">
+      <svg width="100" height="100" viewBox="0 0 100 100">
+        <polygon points="50,5 90,25 90,75 50,95 10,75 10,25" fill="rgba(102, 126, 234, 0.2)" stroke="rgba(102, 126, 234, 0.5)" stroke-width="2"/>
+      </svg>
+    </div>
+    <div class="shape">
+      <svg width="80" height="80" viewBox="0 0 80 80">
+        <circle cx="40" cy="40" r="35" fill="none" stroke="rgba(240, 147, 251, 0.5)" stroke-width="2"/>
+        <circle cx="40" cy="40" r="20" fill="rgba(240, 147, 251, 0.1)"/>
+      </svg>
+    </div>
+    <div class="shape">
+      <svg width="120" height="120" viewBox="0 0 120 120">
+        <rect x="10" y="10" width="100" height="100" fill="none" stroke="rgba(80, 200, 120, 0.5)" stroke-width="2" transform="rotate(45 60 60)"/>
+      </svg>
+    </div>
+  </div>
+
+  <header>
+    <canvas class="math-canvas" id="mathCanvas"></canvas>
+    <div class="hero-content fade-in">
+      <h1 class="hero-title">Sonu Kumar</h1>
+      <p class="hero-subtitle">Mathematician • Web Developer • Problem Solver</p>
+      <div class="math-formula">∫ f(x)dx = lim(n→∞) Σ f(xi)Δx</div>
+      <p style="max-width: 600px; margin: 2rem auto; font-size: 1.1rem; opacity: 0.9;">
+        Exploring the infinite beauty of mathematics through code, visualizations, and creative problem-solving. 
+        Currently studying at ISI Bangalore, where numbers meet innovation.
+      </p>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#visualizations">Visualizations</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section id="about" class="fade-in">
+    <h2>About Me</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <h3>🔢 Mathematical Passion</h3>
+        <p>Numbers have always fascinated me. From the elegance of prime sequences to the beauty of geometric proofs, I find wonder in mathematical patterns that govern our universe.</p>
+      </div>
+      <div class="card">
+        <h3>💻 Code & Logic</h3>
+        <p>Programming is mathematics in action. I love translating complex algorithms into clean, efficient code that solves real-world problems.</p>
+      </div>
+      <div class="card">
+        <h3>🎓 Continuous Learning</h3>
+        <p>Currently at ISI Bangalore, I'm constantly exploring new frontiers in mathematics, from pure theory to applied computational methods.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="fade-in">
+    <h2>Skills & Expertise</h2>
+    <div class="skills-grid">
+      <div class="skill-item" data-symbol="∫">
+        <h3>Mathematical Analysis</h3>
+        <div class="skill-level">
+          <div class="skill-progress" style="width: 95%"></div>
+        </div>
+      </div>
+      <div class="skill-item" data-symbol="∇">
+        <h3>JavaScript & Web Dev</h3>
+        <div class="skill-level">
+          <div class="skill-progress" style="width: 90%"></div>
+        </div>
+      </div>
+      <div class="skill-item" data-symbol="π">
+        <h3>Python & Data Science</h3>
+        <div class="skill-level">
+          <div class="skill-progress" style="width: 85%"></div>
+        </div>
+      </div>
+      <div class="skill-item" data-symbol="Σ">
+        <h3>LaTeX & Documentation</h3>
+        <div class="skill-level">
+          <div class="skill-progress" style="width: 88%"></div>
+        </div>
+      </div>
+      <div class="skill-item" data-symbol="∞">
+        <h3>Machine Learning</h3>
+        <div class="skill-level">
+          <div class="skill-progress" style="width: 75%"></div>
+        </div>
+      </div>
+      <div class="skill-item" data-symbol="∝">
+        <h3>Problem Solving</h3>
+        <div class="skill-level">
+          <div class="skill-progress" style="width: 92%"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="fade-in">
+    <h2>Featured Projects</h2>
+    <div class="cards-grid">
+      <div class="card">
+        <h3>📊 Mathematical Visualizer</h3>
+        <p>Interactive web application for visualizing complex mathematical functions, derivatives, and integrals using HTML5 Canvas and advanced JavaScript animations.</p>
+        <a href="#">Explore Live Demo →</a>
+      </div>
+      <div class="card">
+        <h3>🧮 Prime Number Explorer</h3>
+        <p>A comprehensive tool for exploring prime number patterns, implementing the Sieve of Eratosthenes with optimizations for large number ranges.</p>
+        <a href="#">View on GitHub →</a>
+      </div>
+      <div class="card">
+        <h3>📐 Geometry Calculator</h3>
+        <p>Advanced geometric calculator with 3D visualizations, supporting complex calculations for polygons, polyhedra, and curved surfaces.</p>
+        <a href="#">Try Calculator →</a>
+      </div>
+      <div class="card">
+        <h3>🎯 Fractal Generator</h3>
+        <p>Beautiful fractal visualization tool generating Mandelbrot sets, Julia sets, and custom mathematical fractals with real-time parameter adjustment.</p>
+        <a href="#">Generate Fractals →</a>
+      </div>
+      <div class="card">
+        <h3>📈 Statistical Dashboard</h3>
+        <p>Interactive dashboard for statistical analysis with machine learning integration, featuring data visualization and predictive modeling capabilities.</p>
+        <a href="#">View Dashboard →</a>
+      </div>
+      <div class="card">
+        <h3>🌐 Portfolio Website</h3>
+        <p>This very website! A mathematical-themed portfolio showcasing modern web technologies with dynamic animations and interactive visualizations.</p>
+        <a href="#">View Source Code →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="visualizations" class="fade-in">
+    <h2>Mathematical Visualizations</h2>
+    <div class="math-viz">
+      <p style="margin-bottom: 2rem; font-size: 1.1rem; opacity: 0.9;">
+        Interactive mathematical functions and geometric patterns
+      </p>
+      <canvas class="viz-canvas" id="vizCanvas" width="800" height="400"></canvas>
+      <div style="margin-top: 2rem;">
+        <button onclick="changeVisualization('sine')" style="margin: 0.5rem; padding: 0.5rem 1rem; background: rgba(102, 126, 234, 0.2); border: 1px solid var(--primary); color: var(--text-light); border-radius: 5px; cursor: pointer;">Sine Wave</button>
+        <button onclick="changeVisualization('spiral')" style="margin: 0.5rem; padding: 0.5rem 1rem; background: rgba(102, 126, 234, 0.2); border: 1px solid var(--primary); color: var(--text-light); border-radius: 5px; cursor: pointer;">Golden Spiral</button>
+        <button onclick="changeVisualization('mandelbrot')" style="margin: 0.5rem; padding: 0.5rem 1rem; background: rgba(102, 126, 234, 0.2); border: 1px solid var(--primary); color: var(--text-light); border-radius: 5px; cursor: pointer;">Mandelbrot</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="fade-in">
+    <h2>Let's Connect</h2>
+    <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9;">
+      Ready to collaborate on mathematical projects or discuss the beauty of numbers? Let's talk!
+    </p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <h3>📧 Email</h3>
+        <a href="mailto:sonu@example.com">sonu@example.com</a>
+      </div>
+      <div class="contact-item">
+        <h3>💻 GitHub</h3>
+        <a href="https://github.com/sonukumar" target="_blank">@sonukumar</a>
+      </div>
+      <div class="contact-item">
+        <h3>🔗 LinkedIn</h3>
+        <a href="https://linkedin.com/in/sonukumar" target="_blank">Sonu Kumar</a>
+      </div>
+      <div class="contact-item">
+        <h3>📱 Twitter</h3>
+        <a href="https://twitter.com/sonukumar_math" target="_blank">@sonukumar_math</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Sonu Kumar • Crafted with 💙, Mathematics & Code</p>
+    <p style="margin-top: 1rem; opacity: 0.7; font-size: 0.9rem;">
+      "Mathematics is the language with which God has written the universe" - Galileo Galilei
+    </p>
+  </footer>
+
+  <script>
+    // Mathematical background animation
+    const canvas = document.getElementById('mathCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    let time = 0;
+    
+    function animateBackground() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw mathematical equations floating in background
+      ctx.globalAlpha = 0.1;
+      ctx.fillStyle = '#667eea';
+      ctx.font = '20px Courier New';
+      
+      const equations = ['e^(iπ) + 1 = 0', '∂f/∂x', '∮ F·dr', 'lim(x→∞)', '∇²φ = 0'];
+      
+      equations.forEach((eq, i) => {
+        const x = (canvas.width / equations.length) * i + 50;
+        const y = canvas.height / 2 + Math.sin(time * 0.01 + i) * 100;
+        ctx.fillText(eq, x, y);
+      });
+      
+      // Draw animated mathematical curves
+      ctx.globalAlpha = 0.3;
+      ctx.strokeStyle = '#f093fb';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      
+      for (let x = 0; x < canvas.width; x += 2) {
+        const y = canvas.height / 2 + Math.sin(x * 0.01 + time * 0.02) * 50 + 
+                  Math.cos(x * 0.005 + time * 0.01) * 30;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      
+      ctx.stroke();
+      time++;
+      requestAnimationFrame(animateBackground);
+    }
+    
+    animateBackground();
+    
+    // Visualization canvas
+    const vizCanvas = document.getElementById('vizCanvas');
+    const vizCtx = vizCanvas.getContext('2d');
+    let currentViz = 'sine';
+    let vizTime = 0;
+    
+    function drawSineWave() {
+      vizCtx.clearRect(0, 0, vizCanvas.width, vizCanvas.height);
+      vizCtx.strokeStyle = '#667eea';
+      vizCtx.lineWidth = 3;
+      vizCtx.beginPath();
+      
+      for (let x = 0; x < vizCanvas.width; x++) {
+        const y = vizCanvas.height / 2 + Math.sin((x + vizTime) * 0.02) * 80;
+        if (x === 0) vizCtx.moveTo(x, y);
+        else vizCtx.lineTo(x, y);
+      }
+      
+      vizCtx.stroke();
+      
+      // Add cosine wave
+      vizCtx.strokeStyle = '#f093fb';
+      vizCtx.beginPath();
+      
+      for (let x = 0; x < vizCanvas.width; x++) {
+        const y = vizCanvas.height / 2 + Math.cos((x + vizTime) * 0.02) * 80;
+        if (x === 0) vizCtx.moveTo(x, y);
+        else vizCtx.lineTo(x, y);
+      }
+      
+      vizCtx.stroke();
+    }
+    
+    function drawGoldenSpiral() {
+      vizCtx.clearRect(0, 0, vizCanvas.width, vizCanvas.height);
+      vizCtx.strokeStyle = '#ffd700';
+      vizCtx.lineWidth = 2;
+      vizCtx.beginPath();
+      
+      const centerX = vizCanvas.width / 2;
+      const centerY = vizCanvas.height / 2;
+      
+      for (let t = 0; t < 15; t += 0.1) {
+        const r = 5 * Math.exp(0.3 * t);
+        const x = centerX + r * Math.cos(t + vizTime * 0.01);
+        const y = centerY + r * Math.sin(t + vizTime * 0.01);
+        
+        if (t === 0) vizCtx.moveTo(x, y);
+        else vizCtx.lineTo(x, y);
+      }
+      
+      vizCtx.stroke();
+    }
+    
+    function drawMandelbrot() {
+      const imageData = vizCtx.createImageData(vizCanvas.width, vizCanvas.height);
+      const data = imageData.data;
+      
+      for (let x = 0; x < vizCanvas.width; x++) {
+        for (let y = 0; y < vizCanvas.height; y++) {
+          const a = (x - vizCanvas.width / 2) * 0.006;
+          const b = (y - vizCanvas.height / 2) * 0.006;
+          
+          let ca = a;
+          let cb = b;
+          let n = 0;
+          
+          while (n < 100) {
+            const aa = ca * ca - cb * cb;
+            const bb = 2 * ca * cb;
+            ca = aa + a;
+            cb = bb + b;
+            
+            if (ca * ca + cb * cb > 4) break;
+            n++;
+          }
+          
+          const index = (y * vizCanvas.width + x) * 4;
+          const intensity = n < 100 ? (n / 100) * 255 : 0;
+          
+          data[index] = intensity * 0.4;     // Red
+          data[index + 1] = intensity * 0.7; // Green
+          data[index + 2] = intensity;       // Blue
+          data[index + 3] = 255;             // Alpha
+        }
+      }
+      
+      vizCtx.putImageData(imageData, 0, 0);
+    }
+    
+    function animateVisualization() {
+      switch (currentViz) {
+        case 'sine':
+          drawSineWave();
+          break;
+        case 'spiral':
+          drawGoldenSpiral();
+          break;
+        case 'mandelbrot':
+          drawMandelbrot();
+          return; // Mandelbrot doesn't need continuous animation
+      }
+      
+      vizTime++;
+      requestAnimationFrame(animateVisualization);
+    }
+    
+    function changeVisualization(type) {
+      currentViz = type;
+      vizTime = 0;
+      if (type === 'mandelbrot') {
+        drawMandelbrot();
+      } else {
+        animateVisualization();
+      }
+    }
+    
+    // Start initial animation
+    animateVisualization();
+    
+    // Smooth scroll for navigation
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+    
+    document.querySelectorAll('.fade-in').forEach(el => {
+      observer.observe(el);
+    });
+    
+    // Parallax effect for geometric shapes
+    window.addEventListener('scroll', () => {
+      const scrollY = window.pageYOffset;
+      const shapes = document.querySelectorAll('.shape');
+      
+      shapes.forEach((shape, index) => {
+        const speed = 0.5 + (index * 0.2);
+        shape.style.transform = `translateY(${scrollY * speed}px) rotate(${scrollY * 0.1}deg)`;
+      });
+    });
+    
+    // Add mathematical constants display
+    const mathConstants = [
+      { name: 'π (Pi)', value: '3.14159265359...', description: 'Ratio of circumference to diameter' },
+      { name: 'e (Euler)', value: '2.71828182845...', description: 'Base of natural logarithm' },
+      { name: 'φ (Phi)', value: '1.61803398874...', description: 'Golden ratio' },
+      { name: '√2', value: '1.41421356237...', description: 'Square root of 2' }
+    ];
+    
+    // Dynamic typing effect for math formula
+    const formulas = [
+      '∫ f(x)dx = lim(n→∞) Σ f(xi)Δx',
+      'e^(iπ) + 1 = 0',
+      '∇²φ = ∂²φ/∂x² + ∂²φ/∂y² + ∂²φ/∂z²',
+      'lim(x→0) (sin x)/x = 1',
+      'F = ma = m(dv/dt)'
+    ];
+    
+    let currentFormula = 0;
+    const formulaElement = document.querySelector('.math-formula');
+    
+    function typeFormula() {
+      const formula = formulas[currentFormula];
+      let i = 0;
+      formulaElement.textContent = '';
+      
+      const typeInterval = setInterval(() => {
+        if (i < formula.length) {
+          formulaElement.textContent += formula.charAt(i);
+          i++;
+        } else {
+          clearInterval(typeInterval);
+          setTimeout(() => {
+            currentFormula = (currentFormula + 1) % formulas.length;
+            setTimeout(typeFormula, 1000);
+          }, 3000);
+        }
+      }, 100);
+    }
+    
+    // Start typing animation
+    setTimeout(typeFormula, 2000);
+    
+    // Add interactive hover effects to cards
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.background = 'rgba(102, 126, 234, 0.15)';
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.background = 'rgba(26, 26, 46, 0.6)';
+      });
+    });
+    
+    // Mathematical particle system for header
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 2;
+        this.vy = (Math.random() - 0.5) * 2;
+        this.alpha = 1;
+        this.decay = Math.random() * 0.02 + 0.005;
+      }
+      
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.alpha -= this.decay;
+      }
+      
+      draw(ctx) {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle = '#667eea';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+    
+    const particles = [];
+    
+    function addParticles() {
+      if (particles.length < 50) {
+        particles.push(new Particle(
+          Math.random() * canvas.width,
+          Math.random() * canvas.height
+        ));
+      }
+    }
+    
+    function updateParticles() {
+      for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        particles[i].draw(ctx);
+        
+        if (particles[i].alpha <= 0) {
+          particles.splice(i, 1);
+        }
+      }
+    }
+    
+    // Enhanced background animation with particles
+    function enhancedBackgroundAnimation() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Original background elements
+      ctx.globalAlpha = 0.1;
+      ctx.fillStyle = '#667eea';
+      ctx.font = '20px Courier New';
+      
+      const equations = ['e^(iπ) + 1 = 0', '∂f/∂x', '∮ F·dr', 'lim(x→∞)', '∇²φ = 0'];
+      
+      equations.forEach((eq, i) => {
+        const x = (canvas.width / equations.length) * i + 50;
+        const y = canvas.height / 2 + Math.sin(time * 0.01 + i) * 100;
+        ctx.fillText(eq, x, y);
+      });
+      
+      // Animated curves
+      ctx.globalAlpha = 0.3;
+      ctx.strokeStyle = '#f093fb';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      
+      for (let x = 0; x < canvas.width; x += 2) {
+        const y = canvas.height / 2 + Math.sin(x * 0.01 + time * 0.02) * 50 + 
+                  Math.cos(x * 0.005 + time * 0.01) * 30;
+        if (x === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      
+      ctx.stroke();
+      
+      // Add particles
+      if (Math.random() < 0.3) addParticles();
+      updateParticles();
+      
+      time++;
+      requestAnimationFrame(enhancedBackgroundAnimation);
+    }
+    
+    // Replace the original animation with enhanced version
+    enhancedBackgroundAnimation();
+  </script>
+</body>
+</html>
