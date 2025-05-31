@@ -3,78 +3,816 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sonu Kumar | Portfolio</title>
-  <Link rel="stylesheet" href="/style.css" />
+  <title>Sonu Kumar | Mathematical Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1a1a2e;
+      --secondary: #16213e;
+      --accent: #0f3460;
+      --gold: #e94560;
+      --cyan: #00d9ff;
+      --purple: #7209b7;
+      --green: #06ffa5;
+    }
+
+    body {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.1;
+    }
+
+    /* Header */
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      background: radial-gradient(circle at 50% 50%, rgba(233, 69, 96, 0.1) 0%, transparent 50%);
+    }
+
+    .hero-content {
+      text-align: center;
+      z-index: 2;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 8rem);
+      font-weight: 800;
+      background: linear-gradient(45deg, var(--cyan), var(--purple), var(--gold));
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gradientShift 4s ease-in-out infinite;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      opacity: 0.9;
+      margin-bottom: 2rem;
+      font-weight: 300;
+    }
+
+    .mathematical-symbol {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.3;
+      animation: float 6s ease-in-out infinite;
+      color: var(--cyan);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      z-index: 1000;
+      display: flex;
+      gap: 1rem;
+      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      background: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* Sections */
+    section {
+      padding: 8rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    h2 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      text-align: center;
+      margin-bottom: 4rem;
+      background: linear-gradient(45deg, var(--green), var(--cyan));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .about-text {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      opacity: 0.9;
+    }
+
+    .fibonacci-spiral {
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Skills Section */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .skill-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: all 0.5s ease;
+    }
+
+    .skill-card:hover::before {
+      left: 100%;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 217, 255, 0.3);
+    }
+
+    .skill-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--gold);
+    }
+
+    /* Projects Section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .project-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      transform: translateY(-15px);
+      box-shadow: 0 25px 50px rgba(233, 69, 96, 0.3);
+    }
+
+    .project-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    .project-description {
+      opacity: 0.8;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .project-link {
+      display: inline-block;
+      background: linear-gradient(45deg, var(--purple), var(--gold));
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem 2rem;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .project-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(233, 69, 96, 0.4);
+    }
+
+    /* Blog Section */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .blog-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(6, 255, 165, 0.3);
+    }
+
+    .blog-title {
+      font-size: 1.3rem;
+      color: var(--green);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    /* Contact Section */
+    .contact-content {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-description {
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      opacity: 0.9;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      background: linear-gradient(45deg, var(--cyan), var(--purple));
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .contact-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(0, 217, 255, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0.7;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .rotating {
+      animation: rotate 20s linear infinite;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      nav {
+        position: static;
+        margin: 2rem;
+        justify-content: center;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .contact-links {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      section {
+        padding: 4rem 1rem;
+      }
+    }
+
+    /* Interactive Elements */
+    .math-equation {
+      position: relative;
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      font-family: 'Courier New', monospace;
+      font-size: 1.1rem;
+      margin: 1rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .math-equation:hover {
+      background: rgba(0, 217, 255, 0.1);
+      transform: scale(1.05);
+    }
+
+    /* Geometric Shapes */
+    .geometric-shape {
+      position: absolute;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+
+    .shape-1 {
+      top: 20%;
+      left: 10%;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(45deg, var(--cyan), var(--purple));
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .shape-2 {
+      top: 60%;
+      right: 15%;
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(45deg, var(--gold), var(--green));
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite reverse;
+    }
+
+    .shape-3 {
+      bottom: 30%;
+      left: 20%;
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, var(--purple), var(--cyan));
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      animation: float 10s ease-in-out infinite;
+    }
+  </style>
 </head>
 <body>
+  <!-- Animated Background Canvas -->
+  <canvas class="bg-animation" id="bgCanvas"></canvas>
 
-  <header>
-    <h1>Sonu Kumar</h1>
-    <p>Mathematician • Web Developer • Freelancer</p>
-  </header>
+  <!-- Floating Mathematical Symbols -->
+  <div class="mathematical-symbol" style="top: 20%; left: 5%;">∑</div>
+  <div class="mathematical-symbol" style="top: 40%; right: 8%;">∫</div>
+  <div class="mathematical-symbol" style="bottom: 30%; left: 12%;">π</div>
+  <div class="mathematical-symbol" style="top: 60%; left: 85%;">∞</div>
+  <div class="mathematical-symbol" style="bottom: 20%; right: 15%;">φ</div>
 
+  <!-- Navigation -->
   <nav>
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#projects">Projects</a>
+    <a href="#blog">Blog</a>
     <a href="#contact">Contact</a>
   </nav>
 
+  <!-- Hero Section -->
+  <header>
+    <div class="hero-content">
+      <h1 class="hero-title">Sonu Kumar</h1>
+      <p class="hero-subtitle">Mathematician • Web Developer • Problem Solver</p>
+      <div class="math-equation">
+        ∀ problem ∃ solution | passion × dedication = success
+      </div>
+    </div>
+    
+    <!-- Geometric Shapes -->
+    <div class="geometric-shape shape-1"></div>
+    <div class="geometric-shape shape-2"></div>
+    <div class="geometric-shape shape-3"></div>
+  </header>
+
+  <!-- About Section -->
   <section id="about">
     <h2>About Me</h2>
-    <p style="text-align:center; max-width:700px; margin:auto;">
-      I'm a passionate student and math lover on a journey to explore the world through logic, code, and creativity. I enjoy building clean web apps and solving challenging problems. Currently studying at ISI Bangalore.
-    </p>
+    <div class="about-content">
+      <div class="about-text">
+        <p>I'm a passionate mathematics enthusiast and web developer who finds beauty in the elegant intersection of logic, creativity, and code. My journey through the mathematical universe has led me to explore everything from pure theoretical concepts to practical applications in technology.</p>
+        
+        <p>Currently studying at ISI Bangalore, I spend my time diving deep into mathematical proofs, building interactive web applications, and discovering the hidden patterns that govern our digital world. I believe that mathematics is the universal language that connects art, science, and technology.</p>
+        
+        <div class="math-equation">
+          lim(knowledge → ∞) curiosity = constant
+        </div>
+      </div>
+      
+      <div class="fibonacci-spiral">
+        <svg width="300" height="300" viewBox="0 0 300 300">
+          <defs>
+            <linearGradient id="spiralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#00d9ff"/>
+              <stop offset="50%" style="stop-color:#7209b7"/>
+              <stop offset="100%" style="stop-color:#e94560"/>
+            </linearGradient>
+          </defs>
+          <path d="M150,150 Q150,100 200,100 Q250,100 250,150 Q250,200 200,200 Q100,200 100,150 Q100,50 200,50 Q300,50 300,150 Q300,250 200,250 Q50,250 50,150 Q50,0 200,0" 
+                stroke="url(#spiralGradient)" 
+                stroke-width="3" 
+                fill="none"
+                class="rotating"/>
+        </svg>
+      </div>
+    </div>
   </section>
 
+  <!-- Skills Section -->
   <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills">
-      <div class="card">HTML5 & CSS3</div>
-      <div class="card">JavaScript (ES6+)</div>
-      <div class="card">Python & LaTeX</div>
-      <div class="card">Mathematics & Problem Solving</div>
-      <div class="card">Git & GitHub</div>
-      <div class="card">Machine Learning (Basics)</div>
+    <h2>Skills & Expertise</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">∫</div>
+        <h3>Advanced Mathematics</h3>
+        <p>Calculus, Linear Algebra, Differential Equations, Real Analysis, and Abstract Algebra</p>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon">⟨/⟩</div>
+        <h3>Web Development</h3>
+        <p>HTML5, CSS3, JavaScript (ES6+), React, Node.js, and responsive design principles</p>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <h3>Python & Data Science</h3>
+        <p>NumPy, Pandas, Matplotlib, SciPy, and machine learning fundamentals</p>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon">∑</div>
+        <h3>Mathematical Modeling</h3>
+        <p>Statistical analysis, optimization, and computational mathematics</p>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon">📝</div>
+        <h3>LaTeX & Documentation</h3>
+        <p>Technical writing, mathematical typesetting, and academic publishing</p>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon">🔧</div>
+        <h3>Tools & Frameworks</h3>
+        <p>Git, GitHub, Jupyter, MATLAB, Mathematica, and various IDEs</p>
+      </div>
     </div>
   </section>
 
+  <!-- Projects Section -->
   <section id="projects">
-    <h2>Projects</h2>
-    <div class="projects">
-      <div class="card">
-        <h3>Math Visualizer</h3>
-        <p>A web tool to visualize calculus concepts using HTML5 Canvas and JavaScript.</p>
-        <a href="#">View Project</a>
+    <h2>Featured Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <h3 class="project-title">Interactive Calculus Visualizer</h3>
+        <p class="project-description">
+          A dynamic web application that brings calculus concepts to life through interactive visualizations. Features include derivative plotting, integral approximations, and 3D surface exploration using WebGL and advanced mathematical algorithms.
+        </p>
+        <a href="#" class="project-link">Explore Visualization</a>
       </div>
-      <div class="card">
-        <h3>Portfolio Website</h3>
-        <p>You're looking at it! A sleek, responsive one-page personal site to showcase skills.</p>
-        <a href="#">View Code</a>
+      
+      <div class="project-card">
+        <h3 class="project-title">Fractal Generator</h3>
+        <p class="project-description">
+          A sophisticated tool for generating and exploring fractals including Mandelbrot sets, Julia sets, and custom iterations. Built with HTML5 Canvas and optimized JavaScript for real-time rendering and zoom capabilities.
+        </p>
+        <a href="#" class="project-link">Generate Fractals</a>
       </div>
-      <div class="card">
-        <h3>Freelance Projects</h3>
-        <p>Academic content, tutoring materials, and web components done for clients.</p>
-        <a href="#">View More</a>
+      
+      <div class="project-card">
+        <h3 class="project-title">Mathematical Portfolio</h3>
+        <p class="project-description">
+          This very website! A next-level portfolio combining mathematical aesthetics with modern web development. Features geometric animations, interactive elements, and mathematical elegance throughout the design.
+        </p>
+        <a href="#" class="project-link">View Source</a>
+      </div>
+      
+      <div class="project-card">
+        <h3 class="project-title">Optimization Algorithm Suite</h3>
+        <p class="project-description">
+          A comprehensive collection of optimization algorithms implemented in Python, including gradient descent variants, genetic algorithms, and linear programming solvers with interactive demonstrations.
+        </p>
+        <a href="#" class="project-link">Optimize Now</a>
       </div>
     </div>
   </section>
 
+  <!-- Blog Section -->
+  <section id="blog">
+    <h2>Mathematical Insights</h2>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <h3 class="blog-title">The Beauty of Euler's Identity</h3>
+        <p>Exploring the most beautiful equation in mathematics: e^(iπ) + 1 = 0, and why it connects five fundamental mathematical constants in perfect harmony.</p>
+        <a href="#" class="project-link">Read Article</a>
+      </div>
+      
+      <div class="blog-card">
+        <h3 class="blog-title">Visualizing Higher Dimensions</h3>
+        <p>A journey into the mathematical techniques and computational methods for understanding and representing spaces beyond our three-dimensional experience.</p>
+        <a href="#" class="project-link">Explore Dimensions</a>
+      </div>
+      
+      <div class="blog-card">
+        <h3 class="blog-title">Mathematics in Web Development</h3>
+        <p>How mathematical concepts like linear algebra, calculus, and geometry enhance modern web applications, from animations to algorithms.</p>
+        <a href="#" class="project-link">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
   <section id="contact">
-    <h2>Contact Me</h2>
-    <p style="text-align:center;">
-      Let's connect! Reach out for collaboration or just to say hi 👋
-    </p>
-    <p class="contact" style="text-align:center;">
-      <a href="mailto:you@example.com">you@example.com</a> |
-      <a href="https://github.com/yourusername" target="_blank">GitHub</a> |
-      <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
-    </p>
+    <h2>Let's Connect</h2>
+    <div class="contact-content">
+      <p class="contact-description">
+        Whether you want to discuss the latest mathematical breakthrough, collaborate on a project, or simply share your passion for numbers and code, I'd love to hear from you!
+      </p>
+      
+      <div class="contact-links">
+        <a href="mailto:sonukrnb0@gmail.com" class="contact-link">
+          📧 Email Me
+        </a>
+        <a href="https://github.com/SonuProves" target="_blank" class="contact-link">
+          🐙 GitHub
+        </a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" class="contact-link">
+          💼 LinkedIn
+        </a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" class="contact-link">
+          💼 Instagram
+        </a>
+        
+        <a href="#" class="contact-link">
+          📄 Resume
+        </a>
+      </div>
+    </div>
   </section>
 
   <footer>
-    &copy; 2025 Sonu Kumar • Made with 💙 and Math
+    <p>&copy; 2025 Sonu Kumar • Crafted with 💙, Mathematics, and Code</p>
+    <div class="math-equation" style="margin-top: 1rem;">
+      ∇ · (passion × skill) = success
+    </div>
   </footer>
 
+  <script>
+    // Animated Background Canvas
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Particle system for mathematical visualization
+    const particles = [];
+    const particleCount = 50;
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.size = Math.random() * 2 + 1;
+        this.hue = Math.random() * 360;
+        this.life = Math.random() * 100 + 100;
+        this.maxLife = this.life;
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.life--;
+
+        // Mathematical spiral motion
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+        const dx = this.x - centerX;
+        const dy = this.y - centerY;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx);
+        
+        this.vx += Math.cos(angle + Math.PI/2) * 0.001;
+        this.vy += Math.sin(angle + Math.PI/2) * 0.001;
+
+        // Boundaries
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+
+        // Reset when life ends
+        if (this.life <= 0) {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.life = this.maxLife;
+        }
+      }
+
+      draw() {
+        const alpha = this.life / this.maxLife;
+        ctx.globalAlpha = alpha * 0.6;
+        ctx.fillStyle = `hsl(${this.hue}, 70%, 60%)`;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Initialize particles
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    // Animation loop
+    function animate() {
+      ctx.globalAlpha = 0.1;
+      ctx.fillStyle = '#1a1a2e';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+
+      // Draw connections
+      ctx.globalAlpha = 0.2;
+      ctx.strokeStyle = '#00d9ff';
+      ctx.lineWidth = 0.5;
+      
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+          
+          if (distance < 100) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetSection = document.querySelector(targetId);
+        if (targetSection) {
+          targetSection.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Interactive mathematical equations
+    document.querySelectorAll('.math-equation').forEach(equation => {
+      equation.addEventListener('mouseenter', function() {
+        this.style.background = 'rgba(0, 217, 255, 0.2)';
+        this.style.boxShadow = '0 5px 15px rgba(0, 217, 255, 0.3)';
+      });
+      
+      equation.addEventListener('mouseleave', function() {
+        this.style.background = 'rgba(255, 255, 255, 0.05)';
+        this.style.boxShadow = 'none';
+      });
+    });
+
+    // Parallax effect for mathematical symbols
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const symbols = document.querySelectorAll('.mathematical-symbol');
+      
+      symbols.forEach((symbol, index) => {
+        const speed = 0.5 + (index * 0.1);
+        symbol.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+      });
+    });
+
+    // Card hover effects with mathematical precision
+    document.querySelectorAll('.skill-card, .project-card, .blog-card').forEach(card => {
+      card.addEventListener('mouseenter', function(e) {
+        const rect = this.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+        
+        const rotateX = (mouseY - centerY) / 10;
+        const rotateY = (centerX - mouseX) / 10;
+        
+        this.style.transform = `translateY(-15px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+      });
+    });
+  </script>
 </body>
 </html>
