@@ -27,6 +27,31 @@ jekyll serve
 
 Site builds to `_site/` and previews at `http://localhost:4000`.
 
+## Git workflow
+
+### Pull latest changes
+
+```bash
+git pull origin main
+```
+
+### Stage, commit, and push
+
+```bash
+git add .
+git commit -m "describe your changes"
+git push origin main
+```
+
+If you're on a different branch, replace `main` with your branch name.
+
+### Quick status check
+
+```bash
+git status
+git log --oneline -5
+```
+
 ## Deploy
 
 Push the repo (including `_site/` or configure a CI deploy). If using GitHub Pages:

@@ -18,3 +18,7 @@ $$ \sum_{i=1}^{n} i = \frac{n(n+1)}{2} $$
 Use `##` for section breaks within a post, and regular paragraphs for the body text. Keep one idea per paragraph where you can — it reads better on the web than dense academic blocks.
 
 > Use a blockquote like this for a pull quote, a definition worth calling out, or a quoted result from a paper.
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rDAaUoELrJY?si=pvcq9VyRbhG3AYQC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
