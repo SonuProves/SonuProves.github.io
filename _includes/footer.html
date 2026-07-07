@@ -1,0 +1,35 @@
+<footer class="site-footer" id="contact">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <h2 class="footer-title">{{ site.footer.heading }}</h2>
+        <p class="footer-sub">{{ site.footer.sub }}</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="contact-list">
+            <div><span class="contact-label">Email</span><a href="mailto:{{ site.email }}">{{ site.email }}</a></div>
+            <div><span class="contact-label">LinkedIn</span><a href="{{ site.social.linkedin }}">linkedin.com/in/sonu-kumar</a></div>
+            <div><span class="contact-label">GitHub</span><a href="{{ site.social.github }}">github.com/SonuProves</a></div>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Sections</h4>
+          <div class="footer-links">
+            <a href="{{ "/#about" | relative_url }}">About</a>
+            <a href="{{ "/#education" | relative_url }}">Education</a>
+            <a href="{{ "/#achievements" | relative_url }}">Honors</a>
+            <a href="{{ "/#teaching" | relative_url }}">Teaching</a>
+            <a href="{{ "/blog/" | relative_url }}">Writing</a>
+            <a href="{{ "/cv.pdf" | relative_url }}" target="_blank" rel="noopener">CV (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Sonu Kumar</span>
+      <span>Indian Statistical Institute, Bangalore</span>
+    </div>
+  </div>
+</footer>

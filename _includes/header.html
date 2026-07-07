@@ -1,0 +1,18 @@
+<header class="site-header">
+  <div class="wrap">
+    <a href="{{ "/" | relative_url }}" class="brand">
+      <span class="monogram">SK</span>
+      Sonu Kumar
+    </a>
+    <nav class="site-nav">
+      <a href="{{ "/#about" | relative_url }}">About</a>
+      <a href="{{ "/#education" | relative_url }}">Education</a>
+      <a href="{{ "/#achievements" | relative_url }}">Honors</a>
+      <a href="{{ "/#teaching" | relative_url }}">Teaching</a>
+      <a href="{{ "/blog/" | relative_url }}"{% if page.url contains '/blog/' %} class="active"{% endif %}>Writing</a>
+      <a href="{{ "/#contact" | relative_url }}">Contact</a>
+      <a href="{{ "/cv.pdf" | relative_url }}" class="cta" target="_blank" rel="noopener">CV ↓</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span></button>
+  </div>
+</header>

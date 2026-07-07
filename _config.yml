@@ -1,0 +1,25 @@
+title: Sonu Kumar — Mathematics
+email: sonukrnb0@gmail.com
+description: >-
+  Mathematics student at the Indian Statistical Institute, Bangalore.
+  Olympiad mathematics, teaching, and writing across math, physics, CS, and finance.
+baseurl: ""
+url: ""
+permalink: /blog/:title/
+
+social:
+  linkedin: https://www.linkedin.com/in/sonu-kumar-235705291/
+  github: https://github.com/SonuProves
+
+footer:
+  heading: "Let's talk mathematics — or lessons."
+  sub: "Open to tutoring, mentoring, and conversations about olympiad problems, analysis, or anything in between."
+
+markdown: kramdown
+kramdown:
+  math_engine: null
+
+exclude:
+  - README.md
+  - .gitignore
+  - "*.ps1"

@@ -1,35 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Writing — Sonu Kumar</title>
-<meta name="description" content="Notes and essays at the intersection of mathematics, physics, astrophysics, computer science, economics, finance, and probability.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../css/style.css">
-</head>
-<body>
-
-<header class="site-header">
-  <div class="wrap">
-    <a href="../index.html" class="brand">
-      <span class="monogram">SK</span>
-      Sonu Kumar
-    </a>
-    <nav class="site-nav">
-      <a href="../index.html#about">About</a>
-      <a href="../index.html#education">Education</a>
-      <a href="../index.html#achievements">Honors</a>
-      <a href="../index.html#teaching">Teaching</a>
-      <a href="index.html" class="active">Writing</a>
-      <a href="../index.html#contact">Contact</a>
-      <a href="../cv.pdf" class="cta" target="_blank" rel="noopener">CV ↓</a>
-    </nav>
-    <button class="nav-toggle" aria-label="Toggle menu"><span></span></button>
-  </div>
-</header>
+---
+layout: default
+title: Writing — Sonu Kumar
+description: >-
+  Notes and essays at the intersection of mathematics, physics, astrophysics,
+  computer science, economics, finance, and probability.
+---
 
 <section>
   <div class="wrap">
@@ -53,57 +28,18 @@
     </div>
 
     <div class="post-list reveal">
-
-      <!-- Sample post — replace or duplicate this block for each new article -->
-      <a href="posts/sample-post.html" class="post-card" data-tags="math,stats">
+      {% assign sorted = site.posts | sort: 'date' | reverse %}
+      {% for post in sorted %}
+      <a href="{{ post.url | relative_url }}" class="post-card" data-tags="{{ post.tags | join: ',' }}">
         <div class="post-meta">
-          <span class="field-tag">Mathematics · Probability</span>
+          <span class="field-tag">{{ post.tags | join: ' · ' }}</span>
           <span>·</span>
-          <span>7 min read</span>
+          <span>{{ post.date | date: "%d %b %Y" }}</span>
         </div>
-        <h3 class="post-title">Sample post — replace me</h3>
-        <p class="post-excerpt">This is a placeholder post showing the article template. Duplicate the file at blog/posts/sample-post.html to write a new one, then add a matching card here.</p>
+        <h3 class="post-title">{{ post.title }}</h3>
+        <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
       </a>
-
-      <!-- When you have zero real posts, you can delete the sample above and show this instead:
-      <div class="post-empty">No posts yet — the first one is on its way.</div>
-      -->
-
+      {% endfor %}
     </div>
   </div>
 </section>
-
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="footer-top">
-      <div>
-        <h2 class="footer-title">More on the way.</h2>
-      <p class="footer-sub">New posts get added here as they're written — check back, or <a href="../index.html#contact" style="color:var(--gold-bright); text-decoration:underline;">reach out</a> if there's a topic you'd like covered.</p>      </div>
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h4>Contact</h4>
-          <div class="contact-list">
-            <div><span class="contact-label">Email</span><a href="mailto:sonukrnb0@gmail.com">sonukrnb0@gmail.com</a></div>
-            <div><span class="contact-label">GitHub</span><a href="https://github.com/SonuProves">github.com/SonuProves</a></div>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Sections</h4>
-          <div class="footer-links">
-            <a href="../index.html">Home</a>
-            <a href="../index.html#about">About</a>
-            <a href="../cv.pdf" target="_blank" rel="noopener">CV (PDF)</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 Sonu Kumar</span>
-      <span>Indian Statistical Institute, Bangalore</span>
-    </div>
-  </div>
-</footer>
-
-<script src="../js/main.js"></script>
-</body>
-</html>
